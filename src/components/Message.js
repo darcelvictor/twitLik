@@ -7,6 +7,8 @@ import {
   FiRefreshCw,
   FiUpload,
 } from "react-icons/fi";
+import { formatDistanceToNow } from "date-fns/esm";
+import { fr } from "date-fns/locale";
 
 function Message({ className }) {
   return (
@@ -19,7 +21,8 @@ function Message({ className }) {
       </div>
       <div className="message">
         <header>
-          <h3>Victor Darcel</h3>
+          <h3>Victor Darcel </h3>
+          <span>· {formatDistanceToNow(1615747265360, { locale: fr })}</span>
         </header>
         <p>
           Lorem ipsum dolor sit amet consectetur adipisicing elit. Officia
