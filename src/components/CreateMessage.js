@@ -7,7 +7,18 @@ const INITIAL_STATE = {
 };
 const CreateMessage = () => {
   const handleCreateMessage = () => {
-    console.log(values);
+    const { message } = values;
+    const newMessage = {
+      message,
+      postedBy: {
+        id: "57528",
+        name: "Victor",
+      },
+      likes: [],
+      createAt: Date.now(),
+      photo: "",
+    };
+    console.log(newMessage);
   };
   const { handleSubmit, handleKeyDown, handleChange, values } = useForm(
     INITIAL_STATE,
@@ -18,6 +29,7 @@ const CreateMessage = () => {
       handleSubmit={handleSubmit}
       handleKeyDown={handleKeyDown}
       handleChange={handleChange}
+      values={values}
     />
   );
 };

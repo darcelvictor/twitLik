@@ -6,6 +6,7 @@ const MessageForm = ({
   handleSubmit,
   handleKeyDown,
   handleChange,
+  values,
 }) => {
   return (
     <form onSubmit={handleSubmit} className={className}>
@@ -19,13 +20,21 @@ const MessageForm = ({
         <textarea
           onChange={handleChange}
           onKeyDown={handleKeyDown}
+          value={values.message}
           name="message"
           placeholder="Quoi de neuf ?"
         />
       </div>
       <footer>
-        <p>280</p>
-        <button type="submit">tweeter</button>
+        <p style={{ color: values.message.length > 280 && "red" }}>
+          {280 - values.message.length}
+        </p>
+        <button
+          type="submit"
+          disabled={values.message.length > 280 || values.message.length === 0}
+        >
+          tweeter
+        </button>
       </footer>
     </form>
   );
