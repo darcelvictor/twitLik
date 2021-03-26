@@ -1,7 +1,12 @@
 import React from "react";
 import styled from "styled-components";
 
-const MessageForm = ({ className, handleSubmit, handleKeyDown }) => {
+const MessageForm = ({
+  className,
+  handleSubmit,
+  handleKeyDown,
+  handleChange,
+}) => {
   return (
     <form onSubmit={handleSubmit} className={className}>
       <div>
@@ -12,6 +17,7 @@ const MessageForm = ({ className, handleSubmit, handleKeyDown }) => {
           />
         </div>
         <textarea
+          onChange={handleChange}
           onKeyDown={handleKeyDown}
           name="message"
           placeholder="Quoi de neuf ?"

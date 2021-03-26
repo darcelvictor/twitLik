@@ -6,13 +6,19 @@ const INITIAL_STATE = {
   message: "",
 };
 const CreateMessage = () => {
-  const handleCreateMessage = () => console.log("submit");
-  const { handleSubmit, handleKeyDown } = useForm(
+  const handleCreateMessage = () => {
+    console.log(values);
+  };
+  const { handleSubmit, handleKeyDown, handleChange, values } = useForm(
     INITIAL_STATE,
     handleCreateMessage
   );
   return (
-    <MessageForm handleSubmit={handleSubmit} handleKeyDown={handleKeyDown} />
+    <MessageForm
+      handleSubmit={handleSubmit}
+      handleKeyDown={handleKeyDown}
+      handleChange={handleChange}
+    />
   );
 };
 
