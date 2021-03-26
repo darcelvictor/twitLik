@@ -9,6 +9,7 @@ import {
 } from "react-icons/fi";
 import { formatDistanceToNow } from "date-fns/esm";
 import { fr } from "date-fns/locale";
+import IconContainer from "./IconContainer";
 
 function Message({ className }) {
   return (
@@ -30,11 +31,21 @@ function Message({ className }) {
           voluptatum quo quisquam.
         </p>
         <footer>
-          <FiMessageCircle />
-          <FiRefreshCw />
-          <FiHeart />
-          <FiUpload />
-          <FiX />
+          <IconContainer iconcolor="#1da1f2">
+            <FiMessageCircle />
+          </IconContainer>
+          <IconContainer iconcolor="#5cb85c">
+            <FiRefreshCw />
+          </IconContainer>
+          <IconContainer iconcolor="#d9534f" count="5">
+            <FiHeart />
+          </IconContainer>
+          <IconContainer iconcolor="#1da1f2">
+            <FiUpload />
+          </IconContainer>
+          <IconContainer iconcolor="#d9534f">
+            <FiX />
+          </IconContainer>
         </footer>
       </div>
     </div>

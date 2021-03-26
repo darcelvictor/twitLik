@@ -1,9 +1,9 @@
 import React from "react";
 import styled from "styled-components";
 
-const MessageForm = ({ className }) => {
+const MessageForm = ({ className, handleSubmit, handleKeyDown }) => {
   return (
-    <form className={className}>
+    <form onSubmit={handleSubmit} className={className}>
       <div>
         <div>
           <img
@@ -11,7 +11,11 @@ const MessageForm = ({ className }) => {
             alt="profil"
           />
         </div>
-        <textarea name="message" placeholder="Quoi de neuf ?"></textarea>
+        <textarea
+          onKeyDown={handleKeyDown}
+          name="message"
+          placeholder="Quoi de neuf ?"
+        />
       </div>
       <footer>
         <p>280</p>
