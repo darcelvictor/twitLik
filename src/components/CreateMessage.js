@@ -1,5 +1,6 @@
 import React from "react";
 import useForm from "../hooks/useForm";
+import validateMessage from "../utils/validateMessage";
 import MessageForm from "./MessageForm";
 
 const INITIAL_STATE = {
@@ -22,6 +23,7 @@ const CreateMessage = () => {
   };
   const { handleSubmit, handleKeyDown, handleChange, values } = useForm(
     INITIAL_STATE,
+    validateMessage,
     handleCreateMessage
   );
   return (
