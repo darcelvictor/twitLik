@@ -21,7 +21,7 @@ const CreateMessage = () => {
     };
     console.log(newMessage);
   };
-  const { handleSubmit, handleKeyDown, handleChange, values } = useForm(
+  const { handleSubmit, handleKeyDown, handleChange, values, errors } = useForm(
     INITIAL_STATE,
     validateMessage,
     handleCreateMessage
@@ -32,6 +32,7 @@ const CreateMessage = () => {
       handleKeyDown={handleKeyDown}
       handleChange={handleChange}
       values={values}
+      errors={errors}
     />
   );
 };

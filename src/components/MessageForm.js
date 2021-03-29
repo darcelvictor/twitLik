@@ -7,6 +7,7 @@ const MessageForm = ({
   handleKeyDown,
   handleChange,
   values,
+  errors,
 }) => {
   return (
     <form onSubmit={handleSubmit} className={className}>
@@ -25,6 +26,7 @@ const MessageForm = ({
           placeholder="Quoi de neuf ?"
         />
       </div>
+      {errors && <p>{errors.message}</p>}
       <footer>
         <p style={{ color: values.message.length > 280 && "red" }}>
           {280 - values.message.length}
@@ -46,6 +48,9 @@ export default styled(MessageForm)`
   border: 1px solid #e6ecf0;
   border-width: 0 1px 12px;
   padding: 0.5rem 1rem;
+  p {
+    color: #d9534f;
+  }
   div {
     display: flex;
     img {
@@ -66,6 +71,9 @@ export default styled(MessageForm)`
     display: flex;
     justify-content: flex-end;
     align-items: center;
+    p {
+      color: black;
+    }
     button {
       align-self: flex-end;
       border-radius: 500px;

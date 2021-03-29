@@ -1,16 +1,16 @@
 import { useState, useEffect } from "react";
-import validateMessage from "../utils/validateMessage";
 
 const useForm = (initial_state, validate, next) => {
   const [values, setValues] = useState(initial_state);
   const [errors, setErrors] = useState({});
   const [isSubmitting, setisSubmitting] = useState(false);
 
+  //verifie les erreurs
   useEffect(() => {
     if (isSubmitting) {
-      const error = Object.keys(errors).length !== 0;
-      if (error) {
-        setisSubmitting = false;
+      const isError = Object.keys(errors).length !== 0;
+      if (isError) {
+        setisSubmitting(false);
       } else {
         next();
         setValues(initial_state);
@@ -25,6 +25,7 @@ const useForm = (initial_state, validate, next) => {
     }
   };
 
+  //Change form values
   const handleChange = (event) => {
     event.persist();
     setValues((prevValues) => ({
@@ -34,7 +35,7 @@ const useForm = (initial_state, validate, next) => {
   };
   const handleSubmit = (event) => {
     event.preventDefault();
-    const errors = validateMessage(values);
+    const errors = validate(values);
     setErrors(errors);
     setisSubmitting(true);
   };
@@ -43,6 +44,7 @@ const useForm = (initial_state, validate, next) => {
     handleKeyDown,
     handleChange,
     values,
+    errors,
   };
 };
 

@@ -1,11 +1,14 @@
 import React from "react";
 import styled from "styled-components";
 import { FaFacebook } from "react-icons/fa";
+
+import firebase from "../firebase";
+
 const Header = ({ className }) => {
   return (
     <header className={className}>
       <h1>Test</h1>
-      <button type="button">
+      <button type="button" onClick={() => firebase.login()}>
         <FaFacebook />
         Login
       </button>
