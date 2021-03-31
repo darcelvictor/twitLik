@@ -21,7 +21,7 @@ function Message({ className, message }) {
       const isLike = message.likes.some((like) => like.likeBy.id === user.uid);
       setisLike(isLike);
     }
-  }, []);
+  }, [user, message.likes]);
 
   const handleLike = () => {
     setisLike((prevIsLike) => !prevIsLike);
