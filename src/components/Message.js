@@ -1,4 +1,4 @@
-import React, { useContext } from "react";
+import React, { useContext, useState } from "react";
 import FirebaseContext from "../firebase/context";
 import styled from "styled-components";
 import {
@@ -12,26 +12,27 @@ import { formatDistanceToNow } from "date-fns/esm";
 import { fr } from "date-fns/locale";
 import IconContainer from "./IconContainer";
 
-function Message({ className }) {
+function Message({ className, message }) {
   const { user } = useContext(FirebaseContext);
+
+  const [isLike, setisLike] = useState(false);
+
+  const handleLike = () => {
+    setisLike((prevIsLike) => !prevIsLike);
+  };
+
+  const isOwner = user && user.uid === message.postedBy.id;
   return (
     <div className={className}>
       <div>
-        <img
-          src="https://pbs.twimg.com/profile_images/1070106683316338688/mJxptTmV_400x400.jpg"
-          alt="profil"
-        />
+        <img src={message.photo} alt="profil" />
       </div>
       <div className="message">
         <header>
-          <h3>Victor Darcel </h3>
-          <span>· {formatDistanceToNow(1615747265360, { locale: fr })}</span>
+          <h3>{message.postedBy.name}</h3>
+          <span>· {formatDistanceToNow(message.createAt, { locale: fr })}</span>
         </header>
-        <p>
-          Lorem ipsum dolor sit amet consectetur adipisicing elit. Officia
-          maxime dolore, itaque sequi necessitatibus porro ducimus qui
-          voluptatum quo quisquam.
-        </p>
+        <p>{message.message}</p>
         {user && (
           <footer>
             <IconContainer iconcolor="#1da1f2">
@@ -40,15 +41,21 @@ function Message({ className }) {
             <IconContainer iconcolor="#5cb85c">
               <FiRefreshCw />
             </IconContainer>
-            <IconContainer iconcolor="#d9534f" count="5">
+            <IconContainer
+              iconcolor="#d9534f"
+              count={message.likes.length}
+              onClick={() => handleLike()}
+            >
               <FiHeart />
             </IconContainer>
             <IconContainer iconcolor="#1da1f2">
               <FiUpload />
             </IconContainer>
-            <IconContainer iconcolor="#d9534f">
-              <FiX />
-            </IconContainer>
+            {isOwner && (
+              <IconContainer iconcolor="#d9534f">
+                <FiX />
+              </IconContainer>
+            )}
           </footer>
         )}
       </div>

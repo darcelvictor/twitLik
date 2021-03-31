@@ -1,5 +1,6 @@
 import React, { useContext, useState, useEffect } from "react";
 import { FirebaseContext } from "../firebase";
+import Message from "./Message";
 
 const MessageList = () => {
   const { firebase } = useContext(FirebaseContext);
@@ -16,7 +17,10 @@ const MessageList = () => {
   useEffect(() => {
     const getMessage = () => {
       try {
-        firebase.db.collection("messages").onSnapshot(handleSnapshot);
+        firebase.db
+          .collection("messages")
+          .orderBy("createAt", "desc")
+          .onSnapshot(handleSnapshot);
       } catch (err) {
         console.log(err);
       }
@@ -27,8 +31,9 @@ const MessageList = () => {
 
   return (
     <div>
-      {messages.map(({ id, message }) => (
-        <p key={id}>{message}</p>
+      {messages.map((message) => (
+        <Message key={message.id} message={message} />
+        // <p key={id}>{message}</p>
       ))}
     </div>
   );

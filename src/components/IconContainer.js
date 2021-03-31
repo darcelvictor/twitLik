@@ -25,9 +25,9 @@ const ColorIcon = styled.div`
   }
 `;
 
-const IconContainer = ({ iconcolor, children, count }) => {
+const IconContainer = ({ iconcolor, children, count, ...props }) => {
   return (
-    <ColorIcon iconcolor={iconcolor}>
+    <ColorIcon iconcolor={iconcolor} {...props}>
       <div>{children}</div>
       {count > 0 && <p>{count}</p>}
     </ColorIcon>
