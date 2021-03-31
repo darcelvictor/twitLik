@@ -13,6 +13,7 @@ const ColorIcon = styled.div`
     align-items: center;
     border-radius: 50%;
     transition: 200ms;
+    color: ${(props) => props.isLike && props.iconcolor};
   }
   :hover {
     div,
@@ -25,9 +26,9 @@ const ColorIcon = styled.div`
   }
 `;
 
-const IconContainer = ({ iconcolor, children, count, ...props }) => {
+const IconContainer = ({ iconcolor, children, count, isLike, ...props }) => {
   return (
-    <ColorIcon iconcolor={iconcolor} {...props}>
+    <ColorIcon iconcolor={iconcolor} isLike={isLike} {...props}>
       <div>{children}</div>
       {count > 0 && <p>{count}</p>}
     </ColorIcon>

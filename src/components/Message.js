@@ -1,4 +1,4 @@
-import React, { useContext, useState } from "react";
+import React, { useContext, useState, useEffect } from "react";
 import FirebaseContext from "../firebase/context";
 import styled from "styled-components";
 import {
@@ -13,12 +13,35 @@ import { fr } from "date-fns/locale";
 import IconContainer from "./IconContainer";
 
 function Message({ className, message }) {
-  const { user } = useContext(FirebaseContext);
-
+  const { user, firebase } = useContext(FirebaseContext);
   const [isLike, setisLike] = useState(false);
+
+  useEffect(() => {
+    if (user) {
+      const isLike = message.likes.some((like) => like.likeBy.id === user.uid);
+      setisLike(isLike);
+    }
+  }, []);
 
   const handleLike = () => {
     setisLike((prevIsLike) => !prevIsLike);
+    const likeRef = firebase.db.collection("messages").doc(message.id);
+
+    if (!isLike) {
+      const like = { likeBy: { id: user.uid, name: user.displayName } };
+      const updateLikes = [...message.likes, like];
+      likeRef.update({ likes: updateLikes });
+    } else {
+      const updateLikes = message.likes.filter(
+        (like) => like.likeBy.id !== user.uid
+      );
+      likeRef.update({ likes: updateLikes });
+    }
+  };
+
+  const handleDeleteMessage = () => {
+    const messageRef = firebase.db.collection("messages").doc(message.id);
+    messageRef.delete();
   };
 
   const isOwner = user && user.uid === message.postedBy.id;
@@ -45,6 +68,7 @@ function Message({ className, message }) {
               iconcolor="#d9534f"
               count={message.likes.length}
               onClick={() => handleLike()}
+              isLike={isLike}
             >
               <FiHeart />
             </IconContainer>
@@ -52,7 +76,10 @@ function Message({ className, message }) {
               <FiUpload />
             </IconContainer>
             {isOwner && (
-              <IconContainer iconcolor="#d9534f">
+              <IconContainer
+                iconcolor="#d9534f"
+                onClick={() => handleDeleteMessage()}
+              >
                 <FiX />
               </IconContainer>
             )}

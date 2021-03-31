@@ -9,7 +9,6 @@ import firebase, { FirebaseContext } from "../firebase";
 
 const App = () => {
   const user = useAuth();
-  console.log(user);
   return (
     <FirebaseContext.Provider value={{ user, firebase }}>
       <main className="app">
