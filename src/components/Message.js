@@ -1,4 +1,5 @@
-import React from "react";
+import React, { useContext } from "react";
+import FirebaseContext from "../firebase/context";
 import styled from "styled-components";
 import {
   FiHeart,
@@ -12,6 +13,7 @@ import { fr } from "date-fns/locale";
 import IconContainer from "./IconContainer";
 
 function Message({ className }) {
+  const { user } = useContext(FirebaseContext);
   return (
     <div className={className}>
       <div>
@@ -26,31 +28,29 @@ function Message({ className }) {
           <span>· {formatDistanceToNow(1615747265360, { locale: fr })}</span>
         </header>
         <p>
-          {process.env.NODE_ENV}
-          <br />
-          {process.env.API_KEY}
-          <br />
           Lorem ipsum dolor sit amet consectetur adipisicing elit. Officia
           maxime dolore, itaque sequi necessitatibus porro ducimus qui
           voluptatum quo quisquam.
         </p>
-        <footer>
-          <IconContainer iconcolor="#1da1f2">
-            <FiMessageCircle />
-          </IconContainer>
-          <IconContainer iconcolor="#5cb85c">
-            <FiRefreshCw />
-          </IconContainer>
-          <IconContainer iconcolor="#d9534f" count="5">
-            <FiHeart />
-          </IconContainer>
-          <IconContainer iconcolor="#1da1f2">
-            <FiUpload />
-          </IconContainer>
-          <IconContainer iconcolor="#d9534f">
-            <FiX />
-          </IconContainer>
-        </footer>
+        {user && (
+          <footer>
+            <IconContainer iconcolor="#1da1f2">
+              <FiMessageCircle />
+            </IconContainer>
+            <IconContainer iconcolor="#5cb85c">
+              <FiRefreshCw />
+            </IconContainer>
+            <IconContainer iconcolor="#d9534f" count="5">
+              <FiHeart />
+            </IconContainer>
+            <IconContainer iconcolor="#1da1f2">
+              <FiUpload />
+            </IconContainer>
+            <IconContainer iconcolor="#d9534f">
+              <FiX />
+            </IconContainer>
+          </footer>
+        )}
       </div>
     </div>
   );

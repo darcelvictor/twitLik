@@ -8,15 +8,13 @@ const MessageForm = ({
   handleChange,
   values,
   errors,
+  user,
 }) => {
   return (
     <form onSubmit={handleSubmit} className={className}>
       <div>
         <div>
-          <img
-            src="https://pbs.twimg.com/profile_images/1070106683316338688/mJxptTmV_400x400.jpg"
-            alt="profil"
-          />
+          <img src={user.photoURL} alt="profil" />
         </div>
         <textarea
           onChange={handleChange}

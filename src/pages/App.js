@@ -1,7 +1,7 @@
 import React from "react";
 import CreateMessage from "../components/CreateMessage";
 import Header from "../components/Header";
-import Message from "../components/Message";
+import MessageList from "../components/MessageList";
 
 import useAuth from "../hooks/useAuth";
 import firebase, { FirebaseContext } from "../firebase";
@@ -12,11 +12,11 @@ const App = () => {
   console.log(user);
   return (
     <FirebaseContext.Provider value={{ user, firebase }}>
-      <div className="app">
+      <main className="app">
         <Header />
         <CreateMessage />
-        <Message />
-      </div>
+        <MessageList />
+      </main>
     </FirebaseContext.Provider>
   );
 };
