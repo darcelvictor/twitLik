@@ -26,6 +26,10 @@ function Message({ className }) {
           <span>· {formatDistanceToNow(1615747265360, { locale: fr })}</span>
         </header>
         <p>
+          {process.env.NODE_ENV}
+          <br />
+          {process.env.API_KEY}
+          <br />
           Lorem ipsum dolor sit amet consectetur adipisicing elit. Officia
           maxime dolore, itaque sequi necessitatibus porro ducimus qui
           voluptatum quo quisquam.

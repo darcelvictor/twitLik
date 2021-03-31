@@ -1,17 +1,24 @@
-import React from "react";
+import React, { useContext } from "react";
 import styled from "styled-components";
 import { FaFacebook } from "react-icons/fa";
-
-import firebase from "../firebase";
+import FirebaseContext from "../firebase/context";
 
 const Header = ({ className }) => {
+  const { user, firebase } = useContext(FirebaseContext);
   return (
     <header className={className}>
       <h1>Test</h1>
-      <button type="button" onClick={() => firebase.login()}>
-        <FaFacebook />
-        Login
-      </button>
+      {user ? (
+        <button type="button" onClick={() => firebase.logout()}>
+          <FaFacebook />
+          Logout
+        </button>
+      ) : (
+        <button type="button" onClick={() => firebase.login("facebook")}>
+          <FaFacebook />
+          Login
+        </button>
+      )}
     </header>
   );
 };
